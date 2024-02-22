@@ -1,0 +1,27 @@
+version: '1'
+services:
+  fastapi:
+    build: .
+    volumes:
+      - /api:/api
+    ports:
+      - "8080:8080"
+    command: 
+      - "uvicorn"
+      - "app:app"
+      - "--reload"
+      - "--port=8080"
+      - "--host=0.0.0.0"
+
+  triton:
+    image: nvcr.io/nvidia/tritonserver:23.12-py3
+    volumes:
+      - /triton:/triton
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8002:8002"
+    command: 
+      - "tritonserver"
+      - "--model-repository=/models"
+      - "--model-control-mode=explicit"

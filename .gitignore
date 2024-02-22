@@ -1,0 +1,6 @@
+env/
+sample/
+__pycache__/
+.vscode/
+
+weight/best_m.onnx
